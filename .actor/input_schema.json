@@ -1,0 +1,94 @@
+{
+    "title": "MCP Stress Tester",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "target": {
+            "title": "Target URL",
+            "type": "string",
+            "description": "Specify the target URL",
+            "editor": "textfield"
+        },
+        "sse": {
+            "title": "Enable SSE",
+            "type": "boolean",
+            "description": "Enable SSE switch",
+            "default": false,
+            "editor": "checkbox"
+        },
+        "mode": {
+            "title": "Test Mode",
+            "type": "string",
+            "description": "Test mode: 'normal' (persistent clients that continuously send operations) or 'swarm' (constantly creating/closing clients to simulate dynamic load patterns)",
+            "default": "normal",
+            "enum": ["normal", "swarm"],
+            "enumTitles": ["Normal", "Swarm"],
+            "editor": "select"
+        },
+        "clients": {
+            "title": "Number of clients",
+            "type": "integer",
+            "description": "In normal mode: total number of concurrent client connections to maintain. In swarm mode: number of clients to create in each batch.",
+            "default": 10,
+            "minimum": 1,
+            "editor": "number"
+        },
+        "clientsCreationBatchSize": {
+            "title": "Clients creation batch size",
+            "type": "integer",
+            "description": "In normal mode: number of clients to create in each initialization batch (to avoid overwhelming the server). In swarm mode: this parameter is ignored.",
+            "default": 5,
+            "minimum": 1,
+            "editor": "number"
+        },
+        "opsRate": {
+            "title": "Operations rate",
+            "type": "integer",
+            "description": "In normal mode: operations (list tools) per minute per client. In swarm mode: this parameter is ignored as each client performs exactly one operation before being closed.",
+            "default": 30,
+            "minimum": 1,
+            "editor": "number"
+        },
+        "swarmInterval": {
+            "title": "Swarm interval (ms)",
+            "type": "integer",
+            "description": "Interval in ms between swarm batches (only used in swarm mode). Controls how frequently new client batches are created and destroyed.",
+            "default": 5000,
+            "minimum": 100,
+            "editor": "number"
+        },
+        "maxRetries": {
+            "title": "Maximum retries",
+            "type": "integer",
+            "description": "Maximum number of retries for client creation",
+            "default": 5,
+            "minimum": 0,
+            "editor": "number"
+        },
+        "initialBackoffMs": {
+            "title": "Initial backoff (ms)",
+            "type": "integer",
+            "description": "Initial backoff time in milliseconds",
+            "default": 100,
+            "minimum": 1,
+            "editor": "number"
+        },
+        "maxBackoffMs": {
+            "title": "Maximum backoff (ms)",
+            "type": "integer",
+            "description": "Maximum backoff time in milliseconds",
+            "default": 10000,
+            "minimum": 1,
+            "editor": "number"
+        },
+        "backoffFactor": {
+            "title": "Backoff factor",
+            "type": "integer",
+            "description": "Factor by which to increase backoff time after each retry",
+            "default": 2,
+            "minimum": 1,
+            "editor": "number"
+        }
+    },
+    "required": ["target"]
+}

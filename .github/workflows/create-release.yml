@@ -1,0 +1,97 @@
+name: Create Release with dist
+
+on:
+  workflow_dispatch: # Manual trigger
+    inputs:
+      version:
+        description: 'Release version (e.g., v0.0.1)'
+        required: true
+      prerelease:
+        description: 'Is this a prerelease?'
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Matches your package.json engines
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run linting
+      - name: Lint
+        run: npm run lint
+
+      # Build the project
+      - name: Build
+        run: npm run build
+
+      # Create binary executable
+      - name: Make binary executable
+        run: chmod +x ./dist/index.js
+
+      # Package dist folder as tarball
+      - name: Package dist as tarball
+        run: tar -czf mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz dist
+
+      # Package dist folder as zip
+      - name: Package dist as zip
+        run: zip -r mcp-stress-tester-${{ github.event.inputs.version }}.zip dist
+
+      # Create GitHub release and upload dist
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: MCP Stress Tester ${{ github.event.inputs.version }}
+          body: |
+            ## MCP Stress Tester ${{ github.event.inputs.version }}
+
+            ### Installation
+
+            #### Option 1: Download and extract
+
+            ```bash
+            # For tar.gz
+            curl -L https://github.com/apify/mcp-stress-tester/releases/download/${{ github.event.inputs.version }}/mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz | tar xz
+
+            # For zip
+            curl -L -o mcp-stress-tester.zip https://github.com/apify/mcp-stress-tester/releases/download/${{ github.event.inputs.version }}/mcp-stress-tester-${{ github.event.inputs.version }}.zip
+            unzip mcp-stress-tester.zip
+            ```
+
+            #### Option 2: Install via npm
+
+            ```bash
+            # Install directly from GitHub release
+            npm install -g https://github.com/apify/mcp-stress-tester/releases/download/${{ github.event.inputs.version }}/mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz
+            ```
+
+            ### Usage
+
+            ```bash
+            # Basic usage
+            mcp-stress-tester --target "http://your-mcp-server-url" --clients 10
+
+            # For more options
+            mcp-stress-tester --help
+            ```
+          draft: false
+          prerelease: ${{ github.event.inputs.prerelease }}
+          files: |
+            mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz
+            mcp-stress-tester-${{ github.event.inputs.version }}.zip
