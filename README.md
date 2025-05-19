@@ -1,6 +1,7 @@
 # MCP stress tester 🚀🔥
 
 [![MCP Stress Tester](https://apify.com/actor-badge?actor=jakub.kopecky/mcp-stress-tester)](https://apify.com/jakub.kopecky/mcp-stress-tester)
+[![GitHub Release](https://img.shields.io/github/v/release/apify/mcp-stress-tester)](https://github.com/apify/mcp-stress-tester/releases)
 
 A simple MCP stress tester client Actor for stress-testing your Model Context Protocol server. 💻⚡
 
