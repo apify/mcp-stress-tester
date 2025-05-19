@@ -2,7 +2,7 @@
 
 [![MCP Stress Tester](https://apify.com/actor-badge?actor=jakub.kopecky/mcp-stress-tester)](https://apify.com/jakub.kopecky/mcp-stress-tester)
 
-A simple MCP Stress Tester client Actor for stress-testing your MCP server. 💻⚡
+A simple MCP stress tester client Actor for stress-testing your Model Context Protocol server. 💻⚡
 
 **Supported transports**:
 - Legacy SSE HTTP 🌐
@@ -19,6 +19,25 @@ A simple MCP Stress Tester client Actor for stress-testing your MCP server. 💻
 ## Usage 🛠️
 
 Fill in the target MCP server URL, select the test mode, configure the client settings, and start the Actor to test your MCP server's performance! 🔥
+
+### Actor usage
+
+Visit [Apify Actor page](https://apify.com/jakub.kopecky/mcp-stress-tester) to run the Actor. Details about the run can be found in the Actor run logs.
+
+### CLI usage
+
+**View the latest release for the installation instructions**.
+
+```bash
+# Basic usage with normal mode (default)
+mcp-stress-tester --target "http://your-mcp-server-url" --clients 10
+
+# Swarm mode with 20 clients per batch and 3000ms interval
+mcp-stress-tester --target "http://your-mcp-server-url" --mode swarm --clients 20 --swarmInterval 3000
+
+# Show help
+mcp-stress-tester --help
+```
 
 ### Normal vs swarm mode
 
@@ -49,4 +68,4 @@ Fill in the target MCP server URL, select the test mode, configure the client se
 
 ## Open source 🌟
 
-This project is open source and available on [GitHub](https://github.com/apify/actor-mcp-stress-tester). 🐙✨
+This project is open source and available on [GitHub](https://github.com/apify/mcp-stress-tester). 🐙✨
