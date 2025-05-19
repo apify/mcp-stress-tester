@@ -1,0 +1,12 @@
+{
+    "actorSpecification": 1,
+    "name": "mcp-stress-tester",
+    "title": "MCP Stress Tester",
+    "description": "A simple MCP Stress Tester client Actor for stress-testing your MCP server.",
+    "version": "0.1",
+    "meta": {
+        "templateId": "ts-start"
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile"
+}

@@ -1,0 +1,40 @@
+{
+    "name": "mcp-stress-tester",
+    "version": "0.0.1",
+    "type": "module",
+    "description": "This is an example of an Apify actor.",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "bin": {
+        "mcp-stress-tester": "./dist/index.js"
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.11.3",
+        "@types/yargs": "^17.0.33",
+        "apify": "^3.4.1",
+        "yargs": "^17.7.2",
+        "yargs-parser": "^21.1.1"
+    },
+    "devDependencies": {
+        "@apify/tsconfig": "^0.1.1",
+        "@biomejs/biome": "1.9.4",
+        "tsx": "^4.19.4",
+        "typescript": "^5.8.3"
+    },
+    "scripts": {
+        "build": "tsc",
+        "format": "npx biome format",
+        "format:fix": "npx biome format --write",
+        "lint": "npx biome lint",
+        "lint:fix": "npx biome lint --write",
+        "test": "echo \"Error: oops, the actor has no tests yet, sad!\" && exit 1"
+    },
+    "author": "It's not you it's me",
+    "license": "ISC"
+}
