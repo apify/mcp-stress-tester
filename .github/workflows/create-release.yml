@@ -44,13 +44,13 @@ jobs:
       - name: Make binary executable
         run: chmod +x ./dist/index.js
 
-      # Package dist folder as tarball
-      - name: Package dist as tarball
-        run: tar -czf mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz dist
+      # Package dist folder and package.json as tarball
+      - name: Package dist folder and package.json as tarball
+        run: tar -czf mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz dist package.json
 
-      # Package dist folder as zip
-      - name: Package dist as zip
-        run: zip -r mcp-stress-tester-${{ github.event.inputs.version }}.zip dist
+      # Package dist folder and package.json as zip
+      - name: Package dist folder and package.json as zip
+        run: zip -r mcp-stress-tester-${{ github.event.inputs.version }}.zip dist package.json
 
       # Create GitHub release and upload dist
       - name: Create Release
