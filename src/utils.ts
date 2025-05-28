@@ -5,7 +5,7 @@ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/
 export type CreateClientOptions = {
     targetUrl: string;
     sseEnabled: boolean;
-    token: string;
+    token?: string;
     maxRetries?: number;
     initialBackoffMs?: number;
     maxBackoffMs?: number;
@@ -26,7 +26,7 @@ export async function createClient(
     const {
         targetUrl,
         sseEnabled,
-        token,
+        token = "", // Default to empty string if not provided
         maxRetries = 5,
         initialBackoffMs = 100,
         maxBackoffMs = 10000,
@@ -43,7 +43,7 @@ export async function createClient(
                 transport = new SSEClientTransport(new URL(targetUrl), {
                     requestInit: {
                         headers: {
-                            Authorization: `Bearer ${token}`,
+                            ...(token ? { Authorization: `Bearer ${token}` } : {}),
                         },
                     },
                     eventSourceInit: {
@@ -55,7 +55,7 @@ export async function createClient(
                             init?: RequestInit,
                         ) {
                             const headers = new Headers(init?.headers || {});
-                            headers.set("authorization", `Bearer ${token}`);
+                            if (token) headers.set("authorization", `Bearer ${token}`);
                             return fetch(input, { ...init, headers });
                         },
                         // We have to cast to "any" to use it, since it's non-standard
@@ -67,7 +67,7 @@ export async function createClient(
                     {
                         requestInit: {
                             headers: {
-                                Authorization: `Bearer ${token}`,
+                                ...(token ? { Authorization: `Bearer ${token}` } : {}),
                             },
                         },
                     },
