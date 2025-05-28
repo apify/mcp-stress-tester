@@ -7,6 +7,7 @@ await Actor.init();
 interface Input {
     target: string;
     sse: boolean;
+    token: string;
     clients: number;
     clientsCreationBatchSize: number;
     opsRate: number;
@@ -23,6 +24,7 @@ if (!input) throw new Error("Input is missing!");
 const {
     target: targetUrl,
     sse: sseEnabled,
+    token,
     clients: numClients,
     clientsCreationBatchSize,
     opsRate,
@@ -67,7 +69,7 @@ async function runNormalMode() {
                 createClient({
                     targetUrl,
                     sseEnabled,
-                    token: process.env.APIFY_TOKEN as string,
+                    token,
                     maxRetries,
                     initialBackoffMs,
                     maxBackoffMs,
@@ -87,7 +89,7 @@ async function runNormalMode() {
                 createClient({
                     targetUrl,
                     sseEnabled,
-                    token: process.env.APIFY_TOKEN as string,
+                    token,
                     maxRetries,
                     initialBackoffMs,
                     maxBackoffMs,
@@ -203,7 +205,7 @@ Swarm Benchmark Summary:
                     createClient({
                         targetUrl,
                         sseEnabled,
-                        token: process.env.APIFY_TOKEN as string,
+                        token,
                         maxRetries,
                         initialBackoffMs,
                         maxBackoffMs,

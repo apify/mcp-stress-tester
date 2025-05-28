@@ -16,6 +16,13 @@
             "default": false,
             "editor": "checkbox"
         },
+        "token": {
+            "title": "Bearer token",
+            "type": "string",
+            "description": "Optional Bearer token for authentication",
+            "editor": "textfield",
+            "isSecret": true
+        },
         "mode": {
             "title": "Test Mode",
             "type": "string",
