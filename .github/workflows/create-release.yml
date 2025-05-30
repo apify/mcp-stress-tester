@@ -75,7 +75,6 @@ jobs:
             # Install directly from GitHub release
             npm install -g https://github.com/apify/mcp-stress-tester/releases/download/${{ github.event.inputs.version }}/mcp-stress-tester-${{ github.event.inputs.version }}.tar.gz
             ```
-            ```
           draft: false
           prerelease: ${{ github.event.inputs.prerelease }}
           files: |
