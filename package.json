@@ -9,17 +9,13 @@
     "bin": {
         "mcp-stress-tester": "./dist/index.js"
     },
-    "files": [
-        "dist",
-        "LICENSE",
-        "README.md"
-    ],
+    "files": ["dist", "LICENSE", "README.md"],
     "dependencies": {
-        "@modelcontextprotocol/sdk": "^1.11.3",
+        "@modelcontextprotocol/sdk": "^1.12.3",
         "@types/yargs": "^17.0.33",
-        "apify": "^3.4.1",
-        "yargs": "^17.7.2",
-        "yargs-parser": "^21.1.1"
+        "apify": "^3.4.2",
+        "yargs": "^18.0.0",
+        "yargs-parser": "^22.0.0"
     },
     "devDependencies": {
         "@apify/tsconfig": "^0.1.1",
