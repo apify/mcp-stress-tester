@@ -43,7 +43,9 @@ export async function createClient(
                 transport = new SSEClientTransport(new URL(targetUrl), {
                     requestInit: {
                         headers: {
-                            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                            ...(token
+                                ? { Authorization: `Bearer ${token}` }
+                                : {}),
                         },
                     },
                     eventSourceInit: {
@@ -55,7 +57,8 @@ export async function createClient(
                             init?: RequestInit,
                         ) {
                             const headers = new Headers(init?.headers || {});
-                            if (token) headers.set("authorization", `Bearer ${token}`);
+                            if (token)
+                                headers.set("authorization", `Bearer ${token}`);
                             return fetch(input, { ...init, headers });
                         },
                         // We have to cast to "any" to use it, since it's non-standard
@@ -67,7 +70,9 @@ export async function createClient(
                     {
                         requestInit: {
                             headers: {
-                                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                                ...(token
+                                    ? { Authorization: `Bearer ${token}` }
+                                    : {}),
                             },
                         },
                     },
